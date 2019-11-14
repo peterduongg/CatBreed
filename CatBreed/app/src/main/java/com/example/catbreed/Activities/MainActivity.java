@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements FavouriteFragment
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Fragment fragment = new CatBreedFragment();

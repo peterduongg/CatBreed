@@ -14,7 +14,6 @@ import com.example.catbreed.model.Cat;
 
 public class CatDetailActivity extends AppCompatActivity {
 
-    ConstraintLayout catConstraintLayout;
     TextView breedNameTextView;
     //TextView weightTextView;
     TextView temperamentTextView;

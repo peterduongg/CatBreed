@@ -4,17 +4,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.catbreed.Activities.MainActivity;
 import com.example.catbreed.Other.AppDatabase;
 import com.example.catbreed.Other.CatBreedAdapter;
-import com.example.catbreed.Other.CatDao;
 import com.example.catbreed.R;
 import com.example.catbreed.model.Cat;
 import com.google.gson.Gson;
@@ -58,7 +50,7 @@ public class CatBreedFragment extends Fragment {
 
         final EditText searchText = view.findViewById(R.id.searchBar);
 
-        final CatBreedAdapter catBreedAdapter = new CatBreedAdapter();
+        final CatBreedAdapter catBreedAdapter = new CatBreedAdapter(getContext());
         final AppDatabase db = AppDatabase.getInstance(getContext());
 
         // Start Volley
@@ -68,7 +60,7 @@ public class CatBreedFragment extends Fragment {
         String url = "https://api.thecatapi.com/v1/breeds?api_key=d2ce3042-32ad-4d16-8414-8247b9664dfb";
 
         // Response.Listener<String>. We define what to do after a response is received.
-.
+
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -80,15 +72,11 @@ public class CatBreedFragment extends Fragment {
                 Cat[] catArray = gson.fromJson(response, Cat[].class);
                 final List<Cat> catList = Arrays.asList(catArray);
 
-
                 db.catDao().insert(catList);
-                catBreedAdapter.setData(db.catDao().getAllCats());
+                catBreedAdapter.setData(catList);
 
                 recyclerView.setAdapter(catBreedAdapter);
 
-
-                // It is a good idea to include this line after we are done with the requestQueue.
-                // It just closes the queue.
                 requestQueue.stop();
 
 

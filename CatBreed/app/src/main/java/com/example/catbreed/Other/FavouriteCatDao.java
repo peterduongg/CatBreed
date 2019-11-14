@@ -12,7 +12,7 @@ import com.example.catbreed.model.Cat;
 import java.util.List;
 
 @Dao
-public interface CatDao {
+public interface FavouriteCatDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insert(List<Cat> cat);
