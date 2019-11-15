@@ -47,7 +47,7 @@ public class CatBreedFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_breed);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-
+        //defining searchbar as an edit text
         final EditText searchText = view.findViewById(R.id.searchBar);
 
         final CatBreedAdapter catBreedAdapter = new CatBreedAdapter(getContext());
@@ -65,7 +65,7 @@ public class CatBreedFragment extends Fragment {
             @Override
             public void onResponse(String response) {
 
-//
+//              //getting gson
                 Gson gson = new Gson();
 
                 //Saving Json results into catArray
@@ -79,7 +79,7 @@ public class CatBreedFragment extends Fragment {
 
                 requestQueue.stop();
 
-
+                //search text reaction after user has changed the searchText field
                 searchText.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,6 +93,7 @@ public class CatBreedFragment extends Fragment {
 
                     @Override
                     public void afterTextChanged(Editable s) {
+                        //creates a new list to display when user filters
                         final ArrayList<Cat> filteredList = new ArrayList<>();
                         for (Cat cat : catList) {
                             if (cat.getName().toLowerCase().contains(s.toString().toLowerCase())) {
@@ -107,21 +108,17 @@ public class CatBreedFragment extends Fragment {
 
             }
         };
-//
+
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                //catBreedAdapter.setData(catBreedAdapter);
-
                 Toast.makeText(getContext(), "The request failed: Try connecting to the internet", Toast.LENGTH_SHORT).show();
                 requestQueue.stop();
             }
         };
-//
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, responseListener,
                 errorListener);
-//
 
         requestQueue.add(stringRequest);
 

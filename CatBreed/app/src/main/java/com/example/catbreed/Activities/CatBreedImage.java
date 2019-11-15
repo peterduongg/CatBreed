@@ -1,13 +1,10 @@
 package com.example.catbreed.Activities;
 
-import com.example.catbreed.model.Cat;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
 
+//Class to pull image URL and cat ID
 class CatBreedImage {
-    //@SerializedName("breeds")
     @Expose
     private String id;
     @Expose

@@ -5,16 +5,15 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+//defining cat class based on attributes from gson
 @Entity
 public class Cat{
 
     @PrimaryKey
     @NonNull
     private String id;
-    //Change the names to match the API
     private String name;
     private String description;
-//    private String weight;
     private String temperament;
     private String origin;
     private String life_span;
@@ -44,14 +43,6 @@ public class Cat{
     public void setDescription(String description) {
         this.description = description;
     }
-
-//    public String getWeight() {
-//        return weight;
-//    }
-//
-//    public void setWeight(String weight) {
-//        this.weight = weight;
-//    }
 
     public String getTemperament() {
         return temperament;

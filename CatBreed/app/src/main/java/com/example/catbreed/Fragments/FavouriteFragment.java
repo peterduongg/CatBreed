@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.catbreed.Other.AppDatabase;
 import com.example.catbreed.Other.CatBreedAdapter;
 import com.example.catbreed.Other.FavouriteAppDatabase;
 import com.example.catbreed.R;
-import com.example.catbreed.model.Cat;
-
-import java.util.ArrayList;
 
 public class FavouriteFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -30,7 +26,7 @@ public class FavouriteFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
 
-
+        //similar to CatBreedFragment, except it displays from 'favouriteAppDatabase"
         final View view = inflater.inflate(R.layout.fragment_favourite_recycler, container, false);
         recyclerView = view.findViewById(R.id.rv_favourite);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -47,7 +43,6 @@ public class FavouriteFragment extends Fragment {
 
         return view;
     }
-
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(String string);

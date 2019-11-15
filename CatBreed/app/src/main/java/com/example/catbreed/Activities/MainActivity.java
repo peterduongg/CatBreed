@@ -20,20 +20,19 @@ public class MainActivity extends AppCompatActivity implements FavouriteFragment
 
     BottomNavigationView bottomNavigationView;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //enabling fragment swaps
         Fragment fragment = new CatBreedFragment();
         swapFragment(fragment);
+        //setting buttom navigation bar
         bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                // menuItem = the item on the bottom nav view that was selected
-                // The id's here belong to the items in the menu of the BottomnNavigationView
-                // The menu is chunked out as bottom_nav_menu.xml in the res > menu folder
+
                 if (menuItem.getItemId() == R.id.nav_breeds) {
                     Fragment fragment = new CatBreedFragment();
                     swapFragment(fragment);
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements FavouriteFragment
             }
         });
 
-
     }
 
     @Override
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements FavouriteFragment
 
     }
 
+    //swap fragment method
     private void swapFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -68,29 +67,6 @@ public class MainActivity extends AppCompatActivity implements FavouriteFragment
         fragmentTransaction.commit();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.bottom_nav_view_menu, menu);
-//
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//
-//                return false;
-//            }
-//        });
-//        return true;
-//    }
 
 
 }

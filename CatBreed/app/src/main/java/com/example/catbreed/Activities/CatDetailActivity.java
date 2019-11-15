@@ -7,7 +7,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,15 +16,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.catbreed.Other.AppDatabase;
-import com.example.catbreed.Other.CatBreedAdapter;
 import com.example.catbreed.R;
 import com.example.catbreed.model.Cat;
 import com.google.gson.Gson;
 
 public class CatDetailActivity extends AppCompatActivity {
-
+//defining different elements to be included in the detail view
     TextView breedNameTextView;
-    //TextView weightTextView;
     TextView temperamentTextView;
     TextView originTextView;
     TextView lifeSpanTextView;
@@ -38,6 +35,8 @@ public class CatDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setting content to respective element in XML file
         setContentView(R.layout.cat_breed_detail);
 
         breedNameTextView = findViewById(R.id.breedNameDetail);
@@ -47,14 +46,17 @@ public class CatDetailActivity extends AppCompatActivity {
         wikiTextView = findViewById(R.id.wikiDetail);
         dogFriendTextView = findViewById(R.id.dogFriendDetail);
         descriptionTextView = findViewById(R.id.descriptionDetail);
+        catImageView = findViewById(R.id.catImageViewDetail);
 
-
+        //intent to pass id, to open detail
         Intent intent = getIntent();
 
         String id = intent.getStringExtra("id");
+        //saving cat to db
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
         Cat cat = db.catDao().getCat(id);
 
+        //setting text
         breedNameTextView.setText(cat.getName());
         temperamentTextView.setText(cat.getTemperament());
         originTextView.setText(cat.getOrigin());
@@ -63,15 +65,13 @@ public class CatDetailActivity extends AppCompatActivity {
         dogFriendTextView.setText(" " + cat.getDog_friendly() + " ");
         descriptionTextView.setText(cat.getDescription());
 
+        //calling method to put cat image into ImageView, passing in specific cat id
+        setCatImage(cat.getId());
 
-        catImageView = findViewById(R.id.catImageViewDetail);
-        setCatWeight (cat.getId());
-
-        //String imageUrl = book.getBookImage();
-        //Glide.with(this).load(imageUrl).into(coverImageView);
     }
 
-    private void setCatWeight(String catId) {
+    private void setCatImage(String catId) {
+        //getting image for specified cat (by using id)
         String url = "https://api.thecatapi.com/v1/images/search?breed_id=" + catId;
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
