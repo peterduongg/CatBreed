@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.catbreed.Activities.CatDetailActivity;
-import com.example.catbreed.Fragments.FavouriteFragment;
 import com.example.catbreed.R;
 import com.example.catbreed.model.Cat;
 
@@ -77,12 +76,24 @@ public class CatBreedAdapter extends RecyclerView.Adapter<CatBreedAdapter.CatBre
             }
         });
 
+        if ((database2.favouriteCatDao().getCatId(catAtPosition.getId())) == 1){
+            holder.isBookmarked = true;
+            holder.favouriteImageView.setImageResource(R.drawable.ic_add_box);
+            holder.unfavouriteImageView.setImageResource(R.drawable.ic_minus);
+        }else {
+            holder.isBookmarked = false;
+            holder.unfavouriteImageView.setImageResource(R.drawable.ic_minus_box);
+            holder.favouriteImageView.setImageResource(R.drawable.ic_add);
+        }
+
 
         holder.favouriteImageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 database2.favouriteCatDao().insert(catAtPosition);
+                holder.favouriteImageView.setImageResource(R.drawable.ic_add_box);
+                holder.unfavouriteImageView.setImageResource(R.drawable.ic_minus);
                 Toast.makeText(view.getContext(), "Cat favourited.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -92,6 +103,8 @@ public class CatBreedAdapter extends RecyclerView.Adapter<CatBreedAdapter.CatBre
             @Override
             public void onClick(View view) {
                 database2.favouriteCatDao().delete(catAtPosition);
+                holder.favouriteImageView.setImageResource(R.drawable.ic_add);
+                holder.unfavouriteImageView.setImageResource(R.drawable.ic_minus_box);
                 Toast.makeText(view.getContext(), "Cat removed from favourites.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -126,6 +139,7 @@ public class CatBreedAdapter extends RecyclerView.Adapter<CatBreedAdapter.CatBre
             catBreedTextView = v.findViewById(R.id.breedName);
             favouriteImageView = v.findViewById(R.id.favouriteImageButton);
             unfavouriteImageView = v.findViewById(R.id.unfavouriteImageButton);
+
 
             // We can define onClickListener for bookmark button here because it depends on data
             // unique to this ViewHolder (i.e. whether this item has already been bookmarked or not)

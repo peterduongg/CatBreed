@@ -111,7 +111,10 @@ public class CatBreedFragment extends Fragment {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "The request failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                //catBreedAdapter.setData(catBreedAdapter);
+
+                Toast.makeText(getContext(), "The request failed: Try connecting to the internet", Toast.LENGTH_SHORT).show();
                 requestQueue.stop();
             }
         };

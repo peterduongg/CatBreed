@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Cat {
+public class Cat{
 
     @PrimaryKey
     @NonNull
